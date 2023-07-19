@@ -22,35 +22,35 @@ exports.profile = (req, res) => {
 exports.register = (req, res) => {
   res.render("register");
 };
-exports.registerPost = async (req, res) => {
-  try {
-    const { name, email, adminsname, pass } = req.body;
-    var data = await admins.findOne({ email });
-    if (data == null) {
-      var datas = await admins.create({
-        name,
-        email,
-        adminsname,
-        pass,
-      });
-      if (datas) {
-        console.log("Data Added Successfully!!!");
-        req.flash("success", "Register SuccessFully");
-        res.redirect("back");
-      } else {
-        console.log("Data Not Added");
-        req.flash("success", "Data Not Added");
-        res.redirect("back");
-      }
-    } else {
-      req.flash("success", "Email Already Exist");
-      res.redirect("back");
-      console.log("Email Already Exist");
-    }
-  } catch (error) {
-    console.log(error);
-  }
-};
+// exports.registerPost = async (req, res) => {
+//   try {
+//     const { name, email, adminsname, pass } = req.body;
+//     var data = await admins.findOne({ email });
+//     if (data == null) {
+//       var datas = await admins.create({
+//         name,
+//         email,
+//         adminsname,
+//         pass,
+//       });
+//       if (datas) {
+//         console.log("Data Added Successfully!!!");
+//         req.flash("success", "Register SuccessFully");
+//         res.redirect("back");
+//       } else {
+//         console.log("Data Not Added");
+//         req.flash("success", "Data Not Added");
+//         res.redirect("back");
+//       }
+//     } else {
+//       req.flash("success", "Email Already Exist");
+//       res.redirect("back");
+//       console.log("Email Already Exist");
+//     }
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 exports.login = (req, res) => {
   res.render("login");
 };
@@ -73,7 +73,7 @@ exports.loginPost = async (req, res) => {
           expires:new Date(Date.now() + 24*60*60*1000)
         })
 
-        res.redirect("/admin/");
+        res.redirect("/admin/home");
       } else {
         res.redirect("back");
         console.log("password Is Worng");
