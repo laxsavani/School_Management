@@ -31,7 +31,7 @@ app.use('/admin', require('./routes/adminrouter'));
 require('./config/dataBase')
 
 app.get('/', (req, res) => {
-    res.redirect('/user/home');
+    res.redirect('/admin/login');
 })
 app.use((req, res) => {
     res.render('404');
