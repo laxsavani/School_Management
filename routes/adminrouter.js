@@ -34,7 +34,7 @@ router.get('/mail/:id',admin_token, mail)
 router.get('/logout',(req,res)=>{
     res.cookie("jwt","");
     res.clearCookie();
-    res.redirect('/admin/');
+    res.redirect('/admin/login');
 })
 
 

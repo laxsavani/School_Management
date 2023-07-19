@@ -33,6 +33,10 @@ require('./config/dataBase')
 app.get('/', (req, res) => {
     res.redirect('/admin/login');
 })
+app.get('/admin/', (req, res) => {
+    res.redirect('/admin/login');
+})
+
 app.use((req, res) => {
     res.render('404');
 });
