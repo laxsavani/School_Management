@@ -1,0 +1,61 @@
+<%-include('header')%>
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Form Elements</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item">Forms</li>
+          <li class="breadcrumb-item active">Elements</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+    <%if(messages.success){%>
+
+      <div class="alert alert-success my-2">
+        <%=messages.success%>
+      </div>
+      <%}%> 
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-6">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">General Form Elements</h5>
+
+              <!-- General Form Elements -->
+              <form class="row g-3 needs-validation" novalidate action="/admin/register" method="post">
+                <div class="col-12">
+                  <label for="yourName" class="form-label">Your Name</label>
+                  <input type="text" name="name" class="form-control" id="yourName" required>
+                  <div class="invalid-feedback">Please, enter your name!</div>
+                </div>
+
+                <div class="col-12">
+                  <label for="yourEmail" class="form-label">Your Email</label>
+                  <input type="email" name="email" class="form-control" id="yourEmail" required>
+                  <div class="invalid-feedback">Please enter a valid Email adddress!</div>
+                </div>
+
+                <div class="col-12">
+                  <label for="yourPassword" class="form-label">Password</label>
+                  <input type="password" name="pass" class="form-control" id="yourPassword" required>
+                  <div class="invalid-feedback">Please enter your password!</div>
+                </div>
+
+                <div class="col-12">
+                  <button class="btn btn-primary w-100" type="submit">Create Account</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+<%-include('footer')%>
