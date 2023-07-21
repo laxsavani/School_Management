@@ -25,7 +25,7 @@ app.use(session({
 }))
 
 app.use('/admin', require('./routes/adminrouter'));
-// app.use('/admin', require('./routes/managerrouter'));
+app.use('/manager', require('./routes/managerrouter'));
 // app.use('/user', require('./routes/userrouter'));
 
 require('./config/dataBase')
@@ -35,6 +35,9 @@ app.get('/', (req, res) => {
 })
 app.get('/admin/', (req, res) => {
     res.redirect('/admin/login');
+})
+app.get('/manager/', (req, res) => {
+    res.redirect('/manager/login');
 })
 
 app.use((req, res) => {

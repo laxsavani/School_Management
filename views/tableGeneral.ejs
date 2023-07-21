@@ -3,14 +3,7 @@
 <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>General Tables</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item">Tables</li>
-          <li class="breadcrumb-item active">General</li>
-        </ol>
-      </nav>
+      <h1>Admin Tables</h1>
     </div><!-- End Page Title -->
 
     <section class="section">
@@ -56,10 +49,64 @@
               </table>
               <!-- End Default Table Example -->
             </div>
-
-        </div>
+      </div>
       </div>
     </section>
 
   </main><!-- End #main -->
+
+  <main id="main" class="main mt-0">
+
+    <div class="pagetitle">
+      <h1>Manager Tables</h1>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Default Table</h5>
+              <%if(messages.success){%>
+
+                <div class="alert alert-success">
+                  <%=messages.success[0]%>
+                  <%console.log(messages.success[0])%>
+                </div>
+                <%}%> 
+
+              <!-- Default Table -->
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Sr No.</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Password</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <%var a=1%>
+                  <%for(var i of data){%>
+                    <tr>
+                        <th scope="row"><%=a++%></th>
+                        <td><%=i.name%></td>
+                        <td><%=i.email%></td>
+                        <td><%=i.pass%></td>
+                        <td><img src="<%=i.img%>" alt="image" height="50px"></td>
+                        <td><a href="/admin/update/<%=i.id%>">Update</a> || <a href="/admin/mail/<%=i.id%>">send otp</a></td>
+                      </tr>
+                    <%}%>
+                </tbody>
+              </table>
+              <!-- End Default Table Example -->
+            </div>
+      </div>
+      </div>
+    </section>
+
+  </main>
 <%-include('footer')%>

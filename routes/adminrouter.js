@@ -9,7 +9,7 @@ const {
     profile,
     login,
     faq,
-    registerPost,
+    managerRegister,
     loginPost,
     update,
     updatePost,
@@ -18,7 +18,7 @@ const {
 } = require('../controller/admincontroller')
 
 // router.get('/register', register)
-// router.post('/register', registerPost)
+router.post('/register', managerRegister)
 router.get('/login', login)
 router.post('/login', loginPost)
 

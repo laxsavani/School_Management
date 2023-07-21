@@ -1,4 +1,5 @@
 const admins = require("../model/admins");
+const manager = require("../model/manager");
 const express = require("express");
 const jwt = require('jsonwebtoken')
 const cloudnary = require('../helper/cloudinary')
@@ -19,38 +20,38 @@ exports.tableGeneral = async (req, res) => {
 exports.profile = (req, res) => {
   res.render("profile");
 };
-exports.register = (req, res) => {
-  res.render("register");
-};
-// exports.registerPost = async (req, res) => {
-//   try {
-//     const { name, email, adminsname, pass } = req.body;
-//     var data = await admins.findOne({ email });
-//     if (data == null) {
-//       var datas = await admins.create({
-//         name,
-//         email,
-//         adminsname,
-//         pass,
-//       });
-//       if (datas) {
-//         console.log("Data Added Successfully!!!");
-//         req.flash("success", "Register SuccessFully");
-//         res.redirect("back");
-//       } else {
-//         console.log("Data Not Added");
-//         req.flash("success", "Data Not Added");
-//         res.redirect("back");
-//       }
-//     } else {
-//       req.flash("success", "Email Already Exist");
-//       res.redirect("back");
-//       console.log("Email Already Exist");
-//     }
-//   } catch (error) {
-//     console.log(error);
-//   }
+// exports.register = (req, res) => {
+//   res.render("register");
 // };
+exports.managerRegister = async (req, res) => {
+  try {
+    const { name, email, adminsname, pass } = req.body;
+    var data = await manager.findOne({ email });
+    if (data == null) {
+      var datas = await manager.create({
+        name,
+        email,
+        adminsname,
+        pass,
+      });
+      if (datas) {
+        console.log("Data Added Successfully!!!");
+        req.flash("success", "Manager Register SuccessFully");
+        res.redirect("back");
+      } else {
+        console.log("Data Not Added");
+        req.flash("success", "Data Not Added");
+        res.redirect("back");
+      }
+    } else {
+      req.flash("success", "Email Already Exist");
+      res.redirect("back");
+      console.log("Email Already Exist");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
 exports.login = (req, res) => {
   res.render("login");
 };
