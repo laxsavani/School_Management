@@ -90,14 +90,14 @@
                 </thead>
                 <tbody>
                     <%var a=1%>
-                  <%for(var i of data){%>
+                  <%for(var j of datas){%>
                     <tr>
                         <th scope="row"><%=a++%></th>
-                        <td><%=i.name%></td>
-                        <td><%=i.email%></td>
-                        <td><%=i.pass%></td>
-                        <td><img src="<%=i.img%>" alt="image" height="50px"></td>
-                        <td><a href="/admin/update/<%=i.id%>">Update</a> || <a href="/admin/mail/<%=i.id%>">send otp</a></td>
+                        <td><%=j.name%></td>
+                        <td><%=j.email%></td>
+                        <td><%=j.pass%></td>
+                        <td><img src="<%=j.img%>" alt="image" height="50px"></td>
+                        <td><a href="/manager/update/<%=i.id%>">Update</a> || <a href="/manager/mail/<%=i.id%>">send otp</a> || <a href="/manager/delete/<%=i.id%>">Delete</a></td>
                       </tr>
                     <%}%>
                 </tbody>

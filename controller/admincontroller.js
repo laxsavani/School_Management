@@ -15,7 +15,8 @@ exports.formElenents = (req, res) => {
 };
 exports.tableGeneral = async (req, res) => {
   var data = await admins.find({});
-  res.render("tableGeneral", { data });
+  var datas = await manager.find({});
+  res.render("tableGeneral", { data,datas});
 };
 exports.profile = (req, res) => {
   res.render("profile");

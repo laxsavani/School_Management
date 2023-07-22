@@ -1,0 +1,38 @@
+<%-include('managerHeader')%>
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Update Data</h1>
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item">General table</li>
+            <li class="breadcrumb-item active">Update</li>
+          </ol>
+        </nav>
+      </div><!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">General Form Update</h5>
+  
+                <!-- General Form Update -->
+                <form class="row g-3 needs-validation" enctype="multipart/form-data" action="/manager/update/<%=obj.id%>" method="post">
+                    <label for="chk" aria-hidden="true">Update</label>
+                    <input type="text" name="name" placeholder="User name" value="<%=obj.name%>">
+                    <input type="email" name="email" placeholder="Email" value="<%=obj.email%>">
+                    <input type="file" name="img">
+                    <img src="<%=obj.img%>" alt="" style="width: 200px !important">
+                    <button type="submit">Update</button>
+                  </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+  </main>
+  <%-include('footer')%>
