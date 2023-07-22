@@ -94,6 +94,36 @@ exports.updatePost = async (req, res) => {
 };
 const nodemailer = require("nodemailer");
 
+exports.newPassword = async (req, res) => {
+  var data = await manager.findOne({ email: req.cookies.otp[1]});
+  // console.log(data);
+  var datas = await manager.findByIdAndUpdate(data.id, { pass: req.body.password });
+  if (datas) {
+    req.flash('success',"password updated successfully")
+    res.redirect("/manager")
+  }
+  else {
+    req.flash('success',"password not updated")
+    res.redirect("back");
+  }
+}
+
+exports.conformOTP = async (req, res) => {
+  res.render("conformOTPManager")
+}
+exports.conformOTPPost = async (req, res) => {
+  var otp = req.cookies.otp[0]
+  if (otp == req.body.otp) {
+    console.log("otp matches");
+    res.render("newPassword")
+  }
+  else {
+      console.log("otp does not match");
+      req.flash("success", "otp does not match");
+      res.redirect("back");
+    }
+}
+
 exports.mail = async (req, res) => {
   var data = await manager.findOne({ email: req.body.email });
   if (data == null) {
@@ -121,7 +151,8 @@ exports.mail = async (req, res) => {
     if (info) {
       console.log("OTP Send Successfully");
       req.flash("success", "OTP Send Successfully");
-      res.redirect("back");
+      res.cookie("otp", [otp,data.email])
+      res.render("conformOTPManager");
     } else {
       console.log("OTP Not Send");
       req.flash("success", "OTP Not Send");
