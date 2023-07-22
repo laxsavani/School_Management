@@ -42,7 +42,7 @@
                         <td><%=i.email%></td>
                         <td><%=i.pass%></td>
                         <td><img src="<%=i.img%>" alt="image" height="50px"></td>
-                        <td><a href="/admin/update/<%=i.id%>">Update</a> || <a href="/admin/mail/<%=i.id%>">send otp</a></td>
+                        <td><a href="/admin/updateAdmin/<%=i.id%>">Update</a> || <a href="/admin/mail/<%=i.id%>">send otp</a></td>
                       </tr>
                     <%}%>
                 </tbody>
@@ -97,7 +97,7 @@
                         <td><%=j.email%></td>
                         <td><%=j.pass%></td>
                         <td><img src="<%=j.img%>" alt="image" height="50px"></td>
-                        <td><a href="/manager/update/<%=i.id%>">Update</a> || <a href="/manager/mail/<%=i.id%>">send otp</a> || <a href="/manager/delete/<%=i.id%>">Delete</a></td>
+                        <td><a href="/admin/updateManager/<%=j.id%>">Update</a> || <a href="/admin/mail/<%=j.id%>">send otp</a> || <a href="/admin/delete/<%=j.id%>">Delete</a></td>
                       </tr>
                     <%}%>
                 </tbody>

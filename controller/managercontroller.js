@@ -91,7 +91,7 @@ exports.updatePost = async (req, res) => {
         var update = await manager.findByIdAndUpdate(req.params.id,req.body);
         if(update)
         {
-          res.redirect('tableGeneral')
+          res.redirect('/admin/tableGeneral')
         }
         else
         {
@@ -106,34 +106,45 @@ exports.updatePost = async (req, res) => {
 const nodemailer = require("nodemailer");
 
 exports.mail = async (req, res) => {
-  var data = await manager.findById(req.params.id);
-
-  var transport = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: "laxsavani4259@gmail.com",
-      pass: "zypxhxzjudxwvfmu", 
-    },
-  });
-
-  var otp = Math.floor(100000 + Math.random() * 900000);
-  var info = transport.sendMail({
-    from: "laxsavani4259@gmail.com",
-    to: data.email,
-    subject: "OTP",
-    html: `OTP:- ${otp}`,
-  });
-  console.log(otp);
-
-  if (info) {
-    console.log("OTP Send Successfully"); 
-    req.flash("success", "OTP Send Successfully");
-    res.redirect('back')
-  } else {
-    console.log("OTP Not Send");
-    req.flash("success", "OTP Not Send");
-    res.redirect('back')
+  
+  var data = await manager.findOne({email:req.body.email});
+  if(data==null)
+  {
+    req.flash("success","Email not found")
+    console.log("email not found");
+    res.redirect("back");
   }
+  else
+  {
+    var transport = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "laxsavani4259@gmail.com",
+        pass: "zypxhxzjudxwvfmu", 
+      },
+    });
+  
+    var otp = Math.floor(100000 + Math.random() * 900000);
+    var info = transport.sendMail({
+      from: "laxsavani4259@gmail.com",
+      to: data.email,
+      subject: "OTP",
+      html: `OTP:- ${otp}`,
+    });
+    console.log(otp);
+  
+    if (info) {
+      console.log("OTP Send Successfully"); 
+      req.flash("success", "OTP Send Successfully");
+      res.redirect('back')
+    } else {
+      console.log("OTP Not Send");
+      req.flash("success", "OTP Not Send");
+      res.redirect('back')
+    }
+  }
+
+  // var data = await manager.findById(req.params.id);
 }
 
 exports.deletes = async (req, res) => {
@@ -148,3 +159,7 @@ exports.deletes = async (req, res) => {
     res.redirect("back");
   }
 }
+
+exports.forgot = async (req, res) => {
+  res.render("forgotManager");
+};

@@ -94,13 +94,17 @@ exports.loginPost = async (req, res) => {
 exports.faq = (req, res) => {
   res.render("faq");
 };
-exports.update = async (req, res) => {
+exports.updateAdmin = async (req, res) => {
   var obj = await admins.findById(req.params.id);
   res.render("update", { obj });
   // console.log(req.parems.id);
 };
-exports.updatePost = async (req, res) => {
- 
+exports.updateManager = async (req, res) => {
+  var obj = await manager.findById(req.params.id);
+  res.render("managerUpdate", { obj });
+  // console.log(req.parems.id);
+};
+exports.updatePostAdmin = async (req, res) => {
   try {
     var deletess = await admins.findById(req.params.id)
       if(deletess.imgId)
@@ -139,7 +143,60 @@ exports.updatePost = async (req, res) => {
         var update = await admins.findByIdAndUpdate(req.params.id,req.body);
         if(update)
         {
-          res.redirect('tableGeneral')
+          res.redirect('/admin/tableGeneral')
+        }
+        else
+        {
+          res.redirect('back')
+        }
+      }
+  } catch (error) {
+    console.log(error);
+  }
+
+}
+exports.updatePostManager = async (req, res) => {
+ 
+  try {
+    var deletess = await manager.findById(req.params.id)
+    console.log(deletess,"deletess");
+      if(deletess.imgId)
+      {
+        var ss=await cloudnary.uploader.destroy(deletess.imgId,(err,data)=>{
+          if(err)
+          {
+            console.log(err);
+          }
+          console.log(data);
+        })
+      }
+      else
+      {
+        console.log("image id not define");
+      }
+    console.log(req.file);
+      if(req.file){
+        var data = await cloudnary.uploader.upload(req.file.path)
+      console.log(data,"data");
+      req.body.img = data.secure_url
+      req.body.imgId = data.public_id
+      var update = await manager.findByIdAndUpdate(req.params.id, req.body);
+      if (update) { 
+        console.log("Data Updated Successfully!!!");
+        req.flash("success", "Data Updated Successfully!!!");
+        res.redirect("/admin/tableGeneral");
+      } else {
+        console.log("Data Not Update");
+        req.flash("success", "Data Not Update");
+        res.redirect("back");
+      }
+      }
+      else
+      {
+        var update = await manager.findByIdAndUpdate(req.params.id,req.body);
+        if(update)
+        {
+          res.redirect('/admin/tableGeneral')
         }
         else
         {
@@ -185,7 +242,7 @@ exports.mail = async (req, res) => {
 }
 
 exports.deletes = async (req, res) => {
-  var data = await admins.findByIdAndDelete(req.params.id);
+  var data = await manager.findByIdAndDelete(req.params.id);
   if (data) {
     console.log("Data Deleted Successfully!!!");
     req.flash("success", "Data Deleted Successfully!!!");

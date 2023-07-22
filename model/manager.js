@@ -8,6 +8,12 @@ const manager =new mongoose.Schema({
     },
     pass:{
         type: String
+    },
+    img:{
+        type: String
+    },
+    imgId:{
+        type: String
     }
 })
 

@@ -11,8 +11,10 @@ const {
     faq,
     managerRegister,
     loginPost,
-    update,
-    updatePost,
+    updateAdmin,
+    updateManager,
+    updatePostAdmin,
+    updatePostManager,
     mail,
     // register
 } = require('../controller/admincontroller')
@@ -28,8 +30,10 @@ router.get('/formElenents',admin_token, formElenents)
 router.get('/tableGeneral',admin_token, tableGeneral)
 router.get('/profile',admin_token, profile)
 router.get('/faq',admin_token, faq)
-router.get('/update/:id',admin_token, update)
-router.post('/update/:id',admin_token,upload.single('img'), updatePost)
+router.get('/updateAdmin/:id',admin_token, updateAdmin)
+router.get('/updateManager/:id',admin_token, updateManager)
+router.post('/updateAdmin/:id',admin_token,upload.single('img'), updatePostAdmin)
+router.post('/updateManager/:id',admin_token,upload.single('img'), updatePostManager)
 router.get('/mail/:id',admin_token, mail)
 router.get('/logout',(req,res)=>{
     res.cookie("jwt","");
