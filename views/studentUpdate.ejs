@@ -13,93 +13,106 @@
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Studetnt Register</h5>
+              <h5 class="card-title">Studetnt Update</h5>
 
               <!-- General Form Elements -->
-              <form class="row g-3 needs-validation" enctype="multipart/form-data" action="/manager/register" method="post">
+              <form class="row g-3 needs-validation" enctype="multipart/form-data" action="/manager/studentupdate/<%=obj.id%>" method="post">
                 <div class="col-12">
                   <label for="yourName" class="form-label">Enter Your Name</label>
-                  <input type="text" name="name" class="form-control" id="yourName" required>
+                  <input type="text" name="name" class="form-control" id="yourName" value="<%=obj.name%>">
                   <div class="invalid-feedback">Please, enter your name!</div>
                 </div>
 
                 <div class="col-12">
                   <label for="yourEmail" class="form-label">Enter Your Email</label>
-                  <input type="email" name="semail" class="form-control" id="yourEmail" required>
+                  <input type="email" name="semail" class="form-control" id="yourEmail" value="<%=obj.semail%>">
                   <div class="invalid-feedback">Please enter a valid Email adddress!</div>
                 </div>
 
                 <div class="col-12">
                   <label for="yourPassword" class="form-label">Enter Mobile Number</label>
-                  <input type="number" name="smobile" class="form-control" id="yourPassword" required>
+                  <input type="number" name="smobile" class="form-control" id="yourPassword" value="<%=obj.smobile%>">
                   <div class="invalid-feedback">Please enter your Mobile Number</div>
                 </div>
 
                 <div class="col-12">
                   <label for="yourPassword" class="form-label">Enter Course</label>
-                  <select name="course" id="" class="form-control">
-                    <option hidden value="">-- Select Course --</option>
-                    <option value="Game Development">Game Development</option>
-                    <option value="Web Development">Web Development</option>
-                    <option value="Flutter Development">Flutter Development</option>
-                    <option value="UI/UX Design">UI/UX Design</option>
+                  <%var course = ['Game Development', 'Web Development', 'Flutter Development', 'UI/UX Design']; %>
+                  <select name="course" class="form-control">
+                    <option value="" selected hidden>Select Course</option>
+                    <%course.forEach((v,i) => {%>
+                        <option value="<%=v%>" <% if(obj.course == v){ %> <%= "selected" %> <%}%>><%=v%></option>
+                        <%});%>
                   </select>
                   <div class="invalid-feedback">Please enter your course</div>
                 </div>
 
                 <div class="col-12">
                   <label for="yourPassword" class="form-label">Enter Fees</label>
-                  <input type="number" class="form-control" name="fees">
+                  <input type="number" class="form-control" name="fees" value="<%=obj.fees%>">
                   <div class="invalid-feedback">Please enter your Fees</div>
                 </div>
 
                 <div class="col-12">
                   <label for="yourPassword" class="form-label">Enter Time</label>
-                  <select name="time" id="" class="form-control" name="time">
-                    <option hidden value="">-- Select Time --</option>
-                    <option value="8:00 AM">8:00 AM</option>
-                    <option value="9:00 AM">9:00 AM</option>
-                    <option value="10:00 AM">10:00 AM</option>
-                    <option value="11:00 AM">11:00 AM</option>
-                    <option value="12:00 AM">12:00 AM</option>
+                  <%var time = ['8:00 AM', '9:00 AM', '10:00 AM', '11:00 AM', '12:00 AM']; %>
+                  <select name="time" class="form-control">
+                    <option value="" selected hidden>Select Time</option>
+                    <%time.forEach((v,i) => {%>
+                        <option value="<%=v%>" <% if(obj.time == v){ %> <%= "selected" %> <%}%>><%=v%></option>
+                        <%});%>
                   </select>
                   <div class="invalid-feedback">Please enter your Time</div>
                 </div>
 
                 <div class="col-12">
                   <label for="yourPassword" class="form-label">Enter Join Date</label>
-                  <input type="date" class="form-control" name="date">
+                  <input type="date" class="form-control" name="date" value="<%=obj.date%>">
                   <div class="invalid-feedback">Please enter your Join Date</div>
                 </div>
 
                 <div class="col-12">
                   <label for="yourPassword" class="form-label">Enter Gender</label><br>
-                  <input type="radio" value="Male" name="gender">Male <br>
-                  <input type="radio" value="Female" name="gender">FeMale <br>
-                  <input type="radio" value="Other" name="gender">Other <br>
+                  <div class="form-check">
+                    <input type="radio" name="gender" id="gender" value="Male" <% if(obj.gender == "Male") { %> <%= "checked" %> <% } %> />
+                    <label class="form-check-label" for="gridRadios1">
+                      Male
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input type="radio" name="gender" id="gender" value="Female" <% if(obj.gender == "Female") { %> <%= "checked" %> <% } %> /> <label class="form-check-label" for="gridRadios2">
+                      Female
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input type="radio" name="gender" id="gender" value="female" <% if(obj.gender == "other") { %> <%= "checked" %> <% } %> /> <label class="form-check-label" for="gridRadios2">
+                      Other
+                    </label>
+                  </div>
                   <div class="invalid-feedback">Please enter your Gender</div>
                 </div>
 
                 <div class="col-12">
                   <label for="yourPassword" class="form-label">Enter Profile Photo</label><br>
                   <input type="file" class="form-control" name="img">
+                  <img src="<%=obj.img%>" height="50px" alt="">
                   <div class="invalid-feedback">Please enter your profile photo</div>
                 </div>
 
                 <div class="col-12">
                   <label for="yourPassword" class="form-label">Enter Parent's Mobile No</label><br>
-                  <input type="number" class="form-control" name="pmobile">
+                  <input type="number" class="form-control" name="pmobile" value="<%=obj.pmobile%>">
                   <div class="invalid-feedback">Please enter your Parent's Mobile No</div>
                 </div>
 
                 <div class="col-12">
                   <label for="yourPassword" class="form-label">Enter Parent's Email</label><br>
-                  <input type="text" class="form-control" name="pemail">
+                  <input type="text" class="form-control" name="pemail" value="<%=obj.pemail%>">
                   <div class="invalid-feedback">Please enter your Parent's Email</div>
                 </div>
 
                 <div class="col-12">
-                  <button class="btn btn-primary w-100" type="submit">Create Account</button>
+                  <button class="btn btn-primary w-100" type="submit">Update Account</button>
                 </div>
               </form>
             </div>

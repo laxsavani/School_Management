@@ -19,7 +19,6 @@ const {
     // register
 } = require('../controller/admincontroller')
 
-// router.get('/register', register)
 router.post('/register', managerRegister)
 router.get('/login', login)
 router.post('/login', loginPost)
