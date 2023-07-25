@@ -106,6 +106,9 @@
                         <div class="row col-lg-3">
                           <a href="/manager/studentupdate/<%=datas.id%>" class="form-control">Update</a>
                         </div>
+                        <div class="row col-lg-3">
+                          <a href="#" onclick="createPDF()" class="form-control">Print</a>
+                        </div>
       
                       </div>
       
@@ -298,7 +301,7 @@
             </div>
           </section>
 
-          <div class="body" style="overflow: scroll;">
+          <div class="body" style="overflow: scroll;" id="ddd">
 
             <div id="invoiceholder">
       
@@ -306,8 +309,8 @@
               <div id="invoice" class="effect2">
       
                 <div id="invoice-top" style="display: flex; justify-content: center; align-items: center;">
-      
-                  <img src="/images/morsy.png" height="63px" alt="">
+            
+                  <img src="<%=datas.img%>" height="100px" width="100px" class="rounded-2 position-absolute top-30 start-0 mx-5" alt="">
       
                   <div class="info">
                     <h2 style="font-size:48px; color: #c7242e;" class="mt-2"> Multimedia <span
@@ -402,4 +405,18 @@
 
   </main><!-- End #main -->
 
+  <script src="https://cdn.bootcss.com/html2pdf.js/0.9.1/html2pdf.bundle.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.1/html2pdf.bundle.min.js"></script>
+  <script>
+        function createPDF() {
+      var element = document.getElementById('ddd');
+      html2pdf(element, {
+        filename: 'MorsyMultimediafees.pdf',
+        image: { type: 'jpeg', quality: 2480 },
+      html2canvas: { scale: 2, logging: true },
+        jsPDF: { unit: 'in', format: 'A3' },
+        class: createPDF
+      });
+    };
+  </script>
 <%-include('footer')%>
