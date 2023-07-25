@@ -72,7 +72,9 @@ exports.table = async (req, res) => {
 };
 exports.showSutdentDetail = async (req, res) => {
   var datas = await student.findById(req.params.id);
-  res.render("studentDetail", { datas });
+  var fees = await payFees.find({studentId: req.params.id})
+  var last = await fees.slice(-1);
+  res.render("studentDetail", { datas , last });
 };
 
 exports.loginPost = async (req, res) => {
