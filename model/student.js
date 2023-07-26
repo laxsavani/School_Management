@@ -38,6 +38,14 @@ const student =new mongoose.Schema({
     },
     psss:{
         type: String
+    },
+    panding_fees:{
+        type: String,
+        default: 0
+    },
+    paid_fees:{
+        type: String,
+        default: 0
     }
 })
 

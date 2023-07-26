@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const cloudnary = require("../helper/cloudinary");
 const nodemailer = require("nodemailer");
 const path = require("path");
-const payFees = require("../model/payFees")
+const payFees = require("../model/payFees");
 
 exports.studentRegister = async (req, res) => {
   try {
@@ -72,9 +72,9 @@ exports.table = async (req, res) => {
 };
 exports.showSutdentDetail = async (req, res) => {
   var datas = await student.findById(req.params.id);
-  var fees = await payFees.find({studentId: req.params.id})
+  var fees = await payFees.find({ studentId: req.params.id });
   var last = await fees.slice(-1);
-  res.render("studentDetail", { datas , last });
+  res.render("studentDetail", { datas, last });
 };
 
 exports.loginPost = async (req, res) => {
@@ -137,7 +137,7 @@ exports.updatePost = async (req, res) => {
     console.log(req.file);
     if (req.file) {
       var data = await cloudnary.uploader.upload(req.file.path);
-      console.log(data, "data");
+      // console.log(data, "data");
       req.body.img = data.secure_url;
       req.body.imgId = data.public_id;
       var update = await manager.findByIdAndUpdate(req.params.id, req.body);
@@ -170,14 +170,14 @@ exports.supdate = async (req, res) => {
 exports.supdatePost = async (req, res) => {
   try {
     var deletess = await student.findById(req.params.id);
-    console.log(deletess);
+    // console.log(deletess);
     if (req.file) {
       if (deletess.imgId) {
         var ss = await cloudnary.uploader.destroy(
           deletess.imgId,
           (err, data) => {
             if (err) {
-              console.log(err,"error deleting");
+              console.log(err);
             }
             console.log(data);
           }
@@ -185,16 +185,16 @@ exports.supdatePost = async (req, res) => {
       } else {
         console.log("image id not define");
       }
-      console.log(req.file);
+      // console.log(req.file);
       var data = await cloudnary.uploader.upload(req.file.path);
-      console.log(data, "data");
+      // console.log(data, "data");
       req.body.img = data.secure_url;
       req.body.imgId = data.public_id;
       var update = await student.findByIdAndUpdate(req.params.id, req.body);
       if (update) {
         console.log("Data Updated Successfully!!!");
         req.flash("success", "Data Updated Successfully!!!");
-        res.redirect("/manager/showSutdentDetail/"+req.params.id);
+        res.redirect("/manager/showSutdentDetail/" + req.params.id);
       } else {
         console.log("Data Not Update");
         req.flash("success", "Data Not Update");
@@ -203,7 +203,7 @@ exports.supdatePost = async (req, res) => {
     } else {
       var update = await student.findByIdAndUpdate(req.params.id, req.body);
       if (update) {
-        res.redirect("/manager/showSutdentDetail/"+req.params.id);
+        res.redirect("/manager/showSutdentDetail/" + req.params.id);
       } else {
         res.redirect("back");
       }
@@ -299,15 +299,18 @@ exports.forgot = async (req, res) => {
 };
 
 exports.fees = async (req, res) => {
-  var studentId = await req.params.id
-  const {payment,date,amount}=req.body;
-  var data = await payFees.create({payment,date,amount,studentId})
+  var studentId = await req.params.id;
+  const { payment, date, amount } = req.body;
+  var datas = await student.findById(studentId);
+  var paid_fees = parseInt(datas.paid_fees) + parseInt(amount);
+  var panding_fees = parseInt(datas.fees) - parseInt(paid_fees)
+  var update = await student.findByIdAndUpdate(studentId, {paid_fees, panding_fees})
+  var data = await payFees.create({ payment, date, amount, studentId });
   if (data) {
     req.flash("success", "Fees Payed Success");
-    res.redirect("back")
-  }
-  else{
+    res.redirect("back");
+  } else {
     req.flash("success", "Fees Not Payed");
-    res.redirect("back")
+    res.redirect("back");
   }
 };
