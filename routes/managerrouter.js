@@ -46,5 +46,10 @@ router.get('/delete/:id',admin_token, deletes)
 
 router.post('/fees/:id', admin_token,fees)
 
+router.get('/logout',(req,res)=>{
+    res.cookie("jwt","");
+    res.clearCookie();
+    res.redirect('/manager/login');
+})
 
 module.exports = router

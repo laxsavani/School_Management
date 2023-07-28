@@ -36,7 +36,7 @@ const student =new mongoose.Schema({
     pemail:{
         type: String
     },
-    psss:{
+    pass:{
         type: String
     },
     panding_fees:{

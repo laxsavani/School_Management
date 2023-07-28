@@ -9,6 +9,7 @@ const payFees = require("../model/payFees");
 
 exports.studentRegister = async (req, res) => {
   try {
+    console.log(req.body);
     const {
       name,
       semail,
@@ -21,14 +22,14 @@ exports.studentRegister = async (req, res) => {
       pmobile,
       pemail,
     } = req.body;
-    const pass = req.body.smobile;
-
+    
     var image = await cloudnary.uploader.upload(req.file.path);
     var img = image.secure_url;
     var imgId = image.public_id;
-
+    
     var data = await student.findOne({ semail });
     if (data == null) {
+      const pass = req.body.smobile;
       var datas = await student.create({
         name,
         semail,
@@ -42,7 +43,7 @@ exports.studentRegister = async (req, res) => {
         imgId,
         pmobile,
         pemail,
-        pass,
+        pass:req.body.smobile,
       });
       if (datas) {
         console.log("Data Added Successfully!!!");
