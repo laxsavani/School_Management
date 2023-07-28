@@ -26,7 +26,7 @@ app.use(session({
 
 app.use('/admin', require('./routes/adminrouter'));
 app.use('/manager', require('./routes/managerrouter'));
-// app.use('/user', require('./routes/userrouter'));
+app.use('/student', require('./routes/studentrouter'));
 
 require('./config/dataBase')
 
