@@ -31,7 +31,7 @@ app.use('/student', require('./routes/studentrouter'));
 require('./config/dataBase')
 
 app.get('/', (req, res) => {
-    res.redirect('/admin/login');
+    res.redirect('/student/login');
 })
 app.get('/admin/', (req, res) => {
     res.redirect('/admin/login');
@@ -39,12 +39,13 @@ app.get('/admin/', (req, res) => {
 app.get('/manager/', (req, res) => {
     res.redirect('/manager/login');
 })
+app.get('/student/', (req, res) => {
+    res.redirect('/student/login');
+})
 
 app.use((req, res) => {
     res.render('404');
 });
-
-
 app.listen(port, (error) => {
     if (error) {
         console.log(error);
