@@ -220,7 +220,7 @@ exports.newPassword = async (req, res) => {
     pass: req.body.password,
   });
   if (datas) {
-    req.flash("success", "password updated successfully");
+    req.flash("success", "password Change successfully");
     res.redirect("/manager");
   } else {
     req.flash("success", "password not updated");
